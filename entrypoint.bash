@@ -26,7 +26,7 @@ gcloud auth configure-docker $INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME
 # check tags and create a docker command parameter
 BUILD_TAGS=""
 for TAG in ${TAG_LIST[@]}; do
-  BUILD_TAGS=" ${BUILD_TAGS} -t \"$INPUT_IMAGE_NAME:$TAG\""  
+  BUILD_TAGS=" ${BUILD_TAGS} -t $INPUT_IMAGE_NAME:$TAG"
 done
 
 # build docker image

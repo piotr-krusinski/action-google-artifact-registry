@@ -21,7 +21,7 @@ image_name                        | Y         |               | Name of created 
 ## Example usage
 ```
 - name: Google Artifact Registry Build & Push
-  uses: piotrkrusinski/action-google-artifact-registry@v1.0
+  uses: piotrkrusinski/action-google-artifact-registry@[version tag]
   with:
     google_project_id: [artifact_registry_project_id]
     google_artifact_registry_region: [artifact_registry_region]
