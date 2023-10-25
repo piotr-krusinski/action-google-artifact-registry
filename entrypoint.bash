@@ -35,6 +35,4 @@ docker build -f "$INPUT_DOCKERFILE" $BUILD_TAGS $BUILD_ARGS .
 # push created docker image with specified tags
 for TAG in ${TAG_LIST[@]}; do
   docker push $TAG
-fi
-
-
+done
