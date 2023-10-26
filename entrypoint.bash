@@ -32,7 +32,12 @@ done
 # build docker image
 docker build -f "$INPUT_DOCKERFILE" $BUILD_TAGS $BUILD_ARGS .
 
+# tag docker images
+for TAG in ${TAG_LIST[@]}; do
+  docker tag ${TAG} $INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME/$INPUT_GOOGLE_PROJECT_ID/$INPUT_GOOGLE_ARTIFACT_REGISTRY_NAME/$INPUT_IMAGE_NAME:$TAG
+done
+
 # push created docker image with specified tags
 for TAG in ${TAG_LIST[@]}; do
-  docker push $TAG
+  docker push $INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME/$INPUT_GOOGLE_PROJECT_ID/$INPUT_GOOGLE_ARTIFACT_REGISTRY_NAME/$INPUT_IMAGE_NAME:$TAG
 done

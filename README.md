@@ -12,6 +12,7 @@ Name                              | Required  | Default value | Description
 google_project_id                 | Y         |               | Google project ID of your project where Artifact Registry is created
 google_artifact_registry_region   | Y         |               | Google Artifact Registry region
 google_artifact_registry_hostname | Y         |               | Google Artifact Registry hostname
+google_artifact_registry_name     | Y         |               | Google Artifact Registry repository name
 service_account_key               | Y         |               | Base64 version of Google Cloud Platform service key to access Artifact Registry
 dockerfile                        | Y         |               | Path to dockerfile
 image_name                        | Y         |               | Name of created image
@@ -26,6 +27,7 @@ image_name                        | Y         |               | Name of created 
     google_project_id: [artifact_registry_project_id]
     google_artifact_registry_region: [artifact_registry_region]
     google_artifact_registry_hostname: [artifact_registry_hostname]
+    google_artifact_registry_name: [artifact_registry_name]
     service_account_key: [base64 of service key]
     dockerfile: [path to your dockerfile]
     image_name: [image name]
