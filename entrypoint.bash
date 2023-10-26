@@ -1,6 +1,16 @@
 #!/bin/bash
 set -e
 
+echo -e "[ACTION] Checking if required parameters are set"
+if [ -z "$INPUT_GOOGLE_PROJECT_ID" ];                  then echo -e "[ACTION] Requirements not met: GOOGLE_PROJECT_ID not set";                  exit 1; fi
+if [ -z "$INPUT_GOOGLE_ARTIFACT_REGISTRY_REGION" ];    then echo -e "[ACTION] Requirements not met: GOOGLE_ARTIFACT_REGISTRY_REGION not set";    exit 1; fi
+if [ -z "$INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME" ];  then echo -e "[ACTION] Requirements not met: GOOGLE_ARTIFACT_REGISTRY_HOSTNAME not set";  exit 1; fi
+if [ -z "$INPUT_GOOGLE_ARTIFACT_REGISTRY_NAME" ];      then echo -e "[ACTION] Requirements not met: GOOGLE_ARTIFACT_REGISTRY_NAME not set";      exit 1; fi
+if [ -z "$INPUT_SERVICE_ACCOUNT_KEY" ];                then echo -e "[ACTION] Requirements not met: SERVICE_ACCOUNT_KEY not set";                exit 1; fi
+if [ -z "$INPUT_DOCKERFILE" ];                         then echo -e "[ACTION] Requirements not met: DOCKERFILE not set";                         exit 1; fi
+if [ -z "$INPUT_IMAGE_NAME" ];                         then echo -e "[ACTION] Requirements not met: IMAGE_NAME not set";                         exit 1; fi
+
+
 # lets decode SA key and save it locally in key file
 echo -e "[ACTION] Preparing key used for authentication"
 echo "$INPUT_SERVICE_ACCOUNT_KEY" | base64 -d > "$HOME"/sa_key.json
@@ -25,10 +35,6 @@ echo -e "[ACTION]   BUILD_ARGS: ${BUILD_ARGS}"
 # authenticate to google using key file
 echo -e "[ACTION] Authenticating to gcloud"
 gcloud auth activate-service-account --key-file="$HOME"/sa_key.json --project "$INPUT_GOOGLE_PROJECT_ID"
-
-# configure docker with specific Artifact Registry
-#echo -e "[ACTION] Gcloud Docker configuration"
-#gcloud auth configure-docker $INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME
 
 # configure docker with specific Artifact Registry
 echo -e "[ACTION] docker configuration"
