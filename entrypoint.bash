@@ -32,7 +32,7 @@ gcloud auth activate-service-account --key-file="$HOME"/sa_key.json --project "$
 
 # configure docker with specific Artifact Registry
 echo -e "[ACTION] docker configuration"
-docker login -u _json_key --password-stdin https://$INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME < ~/.gcloud-api-key.json
+docker login -u _json_key --password-stdin https://$INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME < "$HOME"/sa_key.json
 
 echo -e "[ACTION] Preparing tags"
 # check tags and create a docker command parameter
