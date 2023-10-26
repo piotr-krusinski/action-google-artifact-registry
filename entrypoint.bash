@@ -51,14 +51,14 @@ echo -e "[ACTION] Tagging images"
 # tag docker images
 for TAG in ${TAG_LIST[@]}; do
   IMAGE_TAG=$INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME/$INPUT_GOOGLE_PROJECT_ID/$INPUT_GOOGLE_ARTIFACT_REGISTRY_NAME/$INPUT_IMAGE_NAME:$TAG
-  echo -e "[ACTION]   tag: ${IMAGE_TAG}"
-  docker tag ${TAG} ${IMAGE_TAG}
+  echo -e "[ACTION]   tag: $IMAGE_TAG"
+  docker tag $INPUT_IMAGE_NAME:$TAG $IMAGE_TAG
 done
 
 echo -e "[ACTION] Pushing images to docker registry"
 # push created docker image with specified tags
 for TAG in ${TAG_LIST[@]}; do
   IMAGE_TAG=$INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME/$INPUT_GOOGLE_PROJECT_ID/$INPUT_GOOGLE_ARTIFACT_REGISTRY_NAME/$INPUT_IMAGE_NAME:$TAG
-  echo -e "[ACTION]   pushing: ${IMAGE_TAG}"
+  echo -e "[ACTION]   pushing: $IMAGE_TAG"
   docker push $INPUT_GOOGLE_ARTIFACT_REGISTRY_HOSTNAME/$INPUT_GOOGLE_PROJECT_ID/$INPUT_GOOGLE_ARTIFACT_REGISTRY_NAME/$INPUT_IMAGE_NAME:$TAG
 done
